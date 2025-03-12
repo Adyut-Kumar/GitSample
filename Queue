@@ -1,0 +1,104 @@
+Queue<T>
+
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    // Define the Employee class
+    class Employee
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Position { get; set; }
+
+        public Employee(int id, string name, string position)
+        {
+            ID = id;
+            Name = name;
+            Position = position;
+        }
+
+        // Method to display employee details
+        public override string ToString()
+        {
+            return $"ID: {ID}, Name: {Name}, Position: {Position}";
+        }
+    }
+
+    static void Main()
+    {
+        // Create a Queue to hold Employee objects
+        Queue<Employee> employeeQueue = new Queue<Employee>();
+
+        while (true)
+        {
+            Console.WriteLine("\nSelect an operation:");
+            Console.WriteLine("1. Enqueue (Add Employee)");
+            Console.WriteLine("2. Display List of Employees");
+            Console.WriteLine("3. Total Number of Employees");
+            Console.WriteLine("4. Exit");
+
+            string choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    EnqueueEmployee(employeeQueue);
+                    break;
+                case "2":
+                    DisplayEmployees(employeeQueue);
+                    break;
+                case "3":
+                    TotalNumberOfEmployees(employeeQueue);
+                    break;
+                case "4":
+                    return;
+                default:
+                    Console.WriteLine("Invalid choice, try again.");
+                    break;
+            }
+        }
+    }
+
+    // Enqueue a new Employee
+    static void EnqueueEmployee(Queue<Employee> employeeQueue)
+    {
+        Console.WriteLine("\nEnter Employee ID: ");
+        int id = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Enter Employee Name: ");
+        string name = Console.ReadLine();
+
+        Console.WriteLine("Enter Employee Position: ");
+        string position = Console.ReadLine();
+
+        Employee employee = new Employee(id, name, position);
+        employeeQueue.Enqueue(employee);
+        Console.WriteLine("Employee added to the queue.");
+    }
+
+    // Display List of Employees in the queue
+    static void DisplayEmployees(Queue<Employee> employeeQueue)
+    {
+        if (employeeQueue.Count > 0)
+        {
+            Console.WriteLine("\nEmployee Details in the Queue:");
+            foreach (Employee employee in employeeQueue)
+            {
+                Console.WriteLine(employee);
+            }
+        }
+        else
+        {
+            Console.WriteLine("No employees in the queue.");
+        }
+    }
+
+    // Display Total Number of Employees in the queue
+    static void TotalNumberOfEmployees(Queue<Employee> employeeQueue)
+    {
+        Console.WriteLine($"\nTotal number of employees in the queue: {employeeQueue.Count}");
+    }
+}
